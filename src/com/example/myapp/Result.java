@@ -3,13 +3,14 @@ package com.example.myapp;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 /**
  * Created by g00295140 on 20/10/2015.
  */
-public class Result extends Activity {
+public class Result extends Activity implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,11 +24,21 @@ public class Result extends Activity {
 
         Intent intent = getIntent();
 
-        String sum = (String) intent.getSerializableExtra("SUM");
-        String sub = (String) intent.getSerializableExtra("SUB");
-        String multi = (String) intent.getSerializableExtra("Multi");
-        result.setText(sum);
-        result.setText(sub);
-        result.setText(multi);
+        Bundle myBundle = intent.getExtras();
+
+        Double n1 = myBundle.getDouble("SUB");
+        Double n2 = myBundle.getDouble("SUB1");
+
+        Double res = n1 - n2;
+
+        dataIn.setText("Data is \n" + n1 + "-" + n2 + "="+ res);
+
+        myBundle.putDouble("RESULT",res);
+
+        intent.putExtras(myBundle);
+        setResult(Activity.RESULT_OK,intent);
+    }
+    public void onClick(View v){
+        finish();
     }
 }

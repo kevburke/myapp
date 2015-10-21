@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.view.View.OnClickListener;
+import android.widget.TextView;
 
 public class MyActivity extends Activity {
     /**
@@ -14,6 +15,7 @@ public class MyActivity extends Activity {
      */
     EditText num1;
     EditText num2;
+    TextView Result;
     Button add;
     Button sub;
     Button multi;
@@ -30,6 +32,7 @@ public class MyActivity extends Activity {
         sub.setOnClickListener(new SubButtonClickHandler());
         multi = (Button) findViewById(R.id.Multi);
         multi.setOnClickListener(new MultiButtonClickHandler());
+        Result = (TextView) findViewById(R.id.Result);
 
 
     }
@@ -75,6 +78,23 @@ public class MyActivity extends Activity {
             startActivityForResult(jj,102);
             //jj.putExtra("Multi", numb1 + "*" + numb2 + "=" + (numb1 * numb2));
             //startActivity(jj);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        try{
+            if ((requestCode==101) && (resultCode == Activity.RESULT_OK)){
+                Bundle resBundle = data.getExtras();
+                Double myResult = resBundle.getDouble("RESULT");
+                Result.setText("Answer is "+ myResult);
+            }
+
+        }
+        catch (Exception e){
+            Result.setText("Errors " + requestCode + resultCode);
         }
     }
 }

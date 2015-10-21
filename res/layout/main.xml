@@ -40,6 +40,12 @@
             android:id="@+id/Multi"
             android:layout_gravity="right"
             android:layout_weight="0.06"/>
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Result"
+            android:id="@+id/Result" android:layout_gravity="center_horizontal" android:layout_weight="0.19"/>
 
 </LinearLayout>
 
